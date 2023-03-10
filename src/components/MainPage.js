@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import Button from "react-bootstrap/Button";
 
+
 function MainPage(props) {
+
   return (
     <div>
       <div style={styles.container}>
         {/* Left Section */}
         <div>
-          <div style={styles.cutomerRating}>
+          <div style={{...styles.cutomerRating, color: `${props.color}` }}>
             {props.currPerson.rating.toFixed(1)}
           </div>
           <Rating
             style={styles.ratingIcon}
             initialValue={props.currPerson.rating}
-            fillColor="#4CAF50"
+            fillColor={props.color}
             allowFraction={true}
             readonly={true}
           />
@@ -22,37 +24,17 @@ function MainPage(props) {
           <h2 style={styles.title}>{props.currPerson.post}</h2>
           <p style={styles.paragraph}>{props.currPerson.description}</p>
           <div style={styles.buttonsContainer}>
-            <Button variant="primary" style={styles.button}>
+            <Button variant="primary" style={{...styles.button, backgroundColor: `${props.color}`}}>
               Book a session
             </Button>
           </div>
         </div>
-
-        {/* Right Section */}
-        {/* <div style={styles.card}>
-          <img
-            style={styles.image}
-            src={props.currPerson.imageUrl}
-            alt="current"
-          />
-          <Button style={styles.button2}>{props.currPerson.name}</Button>
-        </div> */}
       </div>
     </div>
   );
 }
 
 const styles = {
-  halfCircle: {
-    position: "absolute",
-    left: "400px",
-    top: "-1000px",
-    width: "1500px",
-    height: "1500px",
-    backgroundColor: "#C5F8C7",
-    borderRadius: "50%",
-    overflow: "hidden",
-  },
   container: {
     display: "flex",
     flexDirection: "column",
@@ -67,7 +49,6 @@ const styles = {
     lineHeight: "100px",
     marginLeft: "1rem",
     letterSpacing: "0.015em",
-    color: "#609B6C",
   },
   ratingIcon: {
     textAlign: "left",
@@ -76,19 +57,19 @@ const styles = {
     cursor: "default",
   },
   name: {
-    fontFamily: "Poppins",
+    // fontFamily: "Poppins",
     fontStyle: "normal",
-    fontWeight: "500",
-    fontSize: "3rem",
+    fontWeight: "600",
+    fontSize: "40px",
     lineHeight: "4rem",
     letterSpacing: "0.015em",
     color: "#000000",
     textAlign: "left",
   },
   title: {
-    fontFamily: "Poppins",
+    // fontFamily: "Poppins",
     fontStyle: "normal",
-    fontWeight: "100",
+    fontWeight: "400",
     fontSize: "2rem",
     lineHeight: "3rem",
     letterSpacing: "0.015em",
@@ -100,8 +81,8 @@ const styles = {
     maxWidth: "30rem",
     fontFamily: "Poppins",
     fontStyle: "normal",
-    fontWeight: "50",
-    fontSize: "1rem",
+    fontWeight: "400",
+    fontSize: "20px",
     textAlign: "justify",
     letterSpacing: "0.015em",
     color: "#000000",
@@ -110,15 +91,13 @@ const styles = {
   },
   buttonsContainer: {
     position: "absolute",
-    top: "80%",
-    // left: '20%',
+    top: "660px",
     display: "flex",
     justifyContent: "space-between",
     width: "100%",
     maxWidth: "75rem",
   },
   button: {
-    backgroundColor: "#4CAF50",
     border: "none",
     color: "#fff",
     borderRadius: "0",
@@ -127,35 +106,7 @@ const styles = {
     margin: "10px",
     marginLeft: "0",
     boxShadow: "0px 10px 60px rgba(76, 175, 80, 0.9)",
-  },
-  button2: {
-    width: "100%",
-    color: "#000000",
-    fontSize: "30px",
-    background: "rgba(0, 162, 7, 0.17)",
-    borderRadius: "20px",
-    border: "none",
-    marginTop: "3rem",
-  },
-  card: {
-    margin: "0",
-    padding: "0",
-    width: "250px",
-    height: "250px",
-    borderRadius: "50%",
-    position: "absolute",
-    // left: "75%",
-    top: "60%",
-    right: "10%",
-    transition: "opacity 0.5s ease-in-out",
-    transform: "translate(-50%, -50%)",
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    borderRadius: "50%",
-    transition: "opacity 0.5s ease-in-out",
-  },
+  }
 };
 
 export default MainPage;

@@ -6,7 +6,11 @@ import { data } from "./data";
 import Button from "react-bootstrap/esm/Button";
 
 function Wheel() {
+  const [colorEffect, setColorEffect] = useState("#C5F8C7");
+  const [btnColourEffect, setbtnColourEffect] = useState("#4CAF50");
+
   const wheelRef = useRef();
+  const centerWheelRef = useRef();
   const [radius, setRadius] = useState(320);
   const [index, setIndex] = useState(0);
   const [card, setCard] = useState([]);
@@ -16,9 +20,9 @@ function Wheel() {
     y: 0.0,
   });
   const [reload, setReload] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState(true);
 
   useEffect(() => {
-    console.log(data);
     setReload(true);
     setCenterOfWheel((prevState) => ({
       ...prevState,
@@ -43,7 +47,28 @@ function Wheel() {
 
   const [currPerson, setCurrPerson] = useState(data[index]);
 
+  //For Animations
+  const [rotate, setRotate] = useState(false);
+  const [showMainPage, setShowMainPage] = useState(true);
+
   const handleClick = (direction) => {
+    setShowMainPage(false);
+    setRotate(true);
+    setTimeout(() => {
+      setCurrPerson(data[curr]);
+      setIndex(curr);
+      setRotate(false);
+      setShowMainPage(true);
+    }, 400);
+
+    console.log(colorEffect);
+    //changing the backgrounf colour
+    if (colorEffect === "#C5F8C7") setColorEffect("#7ABD87");
+    else setColorEffect("#C5F8C7");
+
+    if (btnColourEffect === "#609B6C") setbtnColourEffect("#4CAF50");
+    else setbtnColourEffect("#609B6C");
+
     let curr = index;
     let newTheta = tempTheta;
     if (direction === "right") {
@@ -57,8 +82,9 @@ function Wheel() {
       }
       newTheta += 45;
     }
-    setCurrPerson(data[curr]);
-    setIndex(curr);
+    setBackgroundColor(!backgroundColor);
+    // setCurrPerson(data[curr]);
+    // setIndex(curr);
     setTempTheta(newTheta);
     wheelRef.current.style.transitionDuration = `1s`;
     wheelRef.current.style.transitionDelay = `0.0s`;
@@ -76,35 +102,66 @@ function Wheel() {
 
   return (
     <div>
-      {/* Left Arrow Button for Wheel */}
-      <div style={{ ...styles.button, ...styles.left }}>
-        <ArrowDown
-          style={styles.arrowDown}
-          onClick={() => handleClick("left")}
-        />
-      </div>
-
       {/* Half Circle Background with Wheel */}
-      <div style={styles.halfCircle}>
+      <div style={{ ...styles.halfCircle, backgroundColor: `${colorEffect}` }}>
+        <div style={styles.dottedLine}></div>
         <div ref={wheelRef} style={styles.wheel}>
           {card.map((card, index) => card)}
         </div>
       </div>
 
-      {/* Center Image Section */}
-      <div style={styles.card}>
-        <img style={styles.image} src={currPerson.imageUrl} alt="current" />
-        <Button style={styles.button2}>{currPerson.name}</Button>
-      </div>
+      {/* Center Wheel */}
+      <div style={styles.centerContainer}>
+        {/* Left Wheel Button */}
+        <div
+          onClick={() => handleClick("left")}
+          style={{
+            ...styles.button,
+            ...styles.left,
+            backgroundColor: `${btnColourEffect}`,
+          }}
+        >
+          <ArrowDown style={styles.arrowDown} />
+        </div>
 
-      {/* Right Arrow Button for Wheel */}
-      <div style={{ ...styles.button, ...styles.right }}>
-        <ArrowDown
-          style={styles.arrowDown}
+        {/* Center Image Section */}
+        <div style={styles.card}>
+          <img
+            ref={centerWheelRef}
+            style={{
+              ...styles.image,
+              transform: `rotate(${rotate ? 180 : 0}deg) scale(${
+                rotate ? 0.5 : 1
+              })`,
+              opacity: rotate ? 0.2 : 1,
+              transition: "transform 1s linear, opacity 1s linear",
+            }}
+            src={currPerson.imageUrl}
+            alt="current"
+          />
+          <Button style={{ ...styles.button2 }}>{currPerson.name}</Button>
+        </div>
+
+        {/* Right Wheel Button */}
+        <div
           onClick={() => handleClick("right")}
-        />
+          style={{
+            ...styles.button,
+            ...styles.right,
+            backgroundColor: `${btnColourEffect}`,
+          }}
+        >
+          <ArrowDown style={styles.arrowDown} />
+        </div>
       </div>
-      <MainPage currPerson={currPerson} />
+      <div
+        style={{
+          opacity: showMainPage ? 1 : 0.5,
+          transition: "opacity 0.5s ease-out, transform 0.5s ease-in",
+        }}
+      >
+        <MainPage currPerson={currPerson} color={btnColourEffect} />
+      </div>
     </div>
   );
 }
@@ -123,43 +180,45 @@ const styles = {
   },
   halfCircle: {
     position: "absolute",
-    left: "400px",
+    left: "350px",
     top: "-1000px",
     width: "1500px",
     height: "1500px",
-    backgroundColor: "#C5F8C7",
     borderRadius: "50%",
+    transition: "background-color 1s ease",
     overflow: "hidden",
   },
   button: {
     position: "absolute",
     height: "50px",
     width: "50px",
-    backgroundColor: "#4CAF50",
     borderRadius: "50%",
-    top: "70%",
+    top: "500px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   left: {
-    right: "40%",
+    left: "700px",
   },
   right: {
-    right: "5%",
+    left: "1400px",
   },
   arrowDown: {
     color: "#FFF",
     fontSize: "26px",
   },
   button2: {
-    width: "100%",
+    marginTop: "3rem",
+    width: "120%",
+    height: "70px",
     color: "#000000",
     fontSize: "30px",
     background: "rgba(0, 162, 7, 0.17)",
     borderRadius: "20px",
     border: "none",
-    marginTop: "3rem",
+    justifyContent: "center",
+    marginLeft: "-1rem",
   },
   card: {
     margin: "0",
@@ -168,16 +227,23 @@ const styles = {
     height: "250px",
     borderRadius: "50%",
     position: "absolute",
-    top: "60%",
-    right: "10%",
-    transition: "opacity 0.5s ease-in-out",
+    top: "500px",
+    left: "1100px",
     transform: "translate(-50%, -50%)",
   },
   image: {
     width: "100%",
     height: "100%",
     borderRadius: "50%",
-    transition: "opacity 0.5s ease-in-out",
+  },
+  dottedLine: {
+    border: "3px dashed #0C3959",
+    height: "640px",
+    width: "640px",
+    position: "absolute",
+    top: "73%",
+    right: "30%",
+    borderRadius: "50%",
   },
 };
 

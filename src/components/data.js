@@ -53,7 +53,7 @@ export const data = [
     description:
       "Senior front-end developer with expertise in ReactJS and TypeScript.",
     post: "SDE 1 - @McAfee",
-    imageUrl: "../assets/image6.jpeg",
+    imageUrl: "../assets/image6.jpg",
   },
   {
     name: "Michael Wong",
