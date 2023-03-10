@@ -20,9 +20,14 @@ You may also see any lint errors in the console.
 
 
 ### Adding Some Screenshot for virtual representation of the Project
-![Image 1](/my-app/public/assets/Screenshot%201.png?raw=true " Screenshot 1")
-![Image 1](/my-app/public/assets/Screenshot%202.png?raw=true " Screenshot 2")
-![Image 1](/my-app/public/assets/Screenshot%203.png?raw=true" Screenshot 3")
+<img width="1677" alt="Screenshot 1" src="https://user-images.githubusercontent.com/75470682/224389256-3bbf7993-4630-4f7d-b695-842c16167ade.png">
+
+
+<img width="1677" alt="Screenshot 2" src="https://user-images.githubusercontent.com/75470682/224389444-82e4350a-fa90-4ac4-bdc2-d0fbf97bdb23.png">
+
+
+<img width="1677" alt="Screenshot 3" src="https://user-images.githubusercontent.com/75470682/224389514-48547ba7-ec22-4467-bf5c-96410883c9c6.png">
+
 
 
 
