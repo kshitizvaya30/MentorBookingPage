@@ -1,3 +1,7 @@
+### Here is the deployed link of the project
+https://mentor-details-page.netlify.app/
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -13,6 +17,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+
+### Adding Some Screenshot for virtual representation of the Project
+![Image 1](/my-app/public/assets/Screenshot%201.png?raw=true " Screenshot 1")
+![Image 1](/my-app/public/assets/Screenshot%202.png?raw=true " Screenshot 2")
+![Image 1](/my-app/public/assets/Screenshot%203.png?raw=true" Screenshot 3")
+
+
 
 ### `npm test`
 
@@ -52,10 +64,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/c
 ### Analyzing the Bundle Size
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
 ### Advanced Configuration
 
